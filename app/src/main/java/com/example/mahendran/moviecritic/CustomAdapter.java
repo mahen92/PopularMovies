@@ -19,10 +19,10 @@ import java.util.Arrays;
 public class CustomAdapter extends ArrayAdapter {
     private Context context;
     private LayoutInflater inflater;
-    ArrayList<String> imageUrls1=new ArrayList<String>();
-    String[] images;
+    ArrayList<Movie> imageUrls1=new ArrayList<>();
+    Movie[] images;
 
-    public CustomAdapter(Context context, ArrayList<String> imageUrls) {
+    public CustomAdapter(Context context, ArrayList<Movie> imageUrls) {
         super(context, R.layout.list_items, imageUrls);
 
         this.context=context;
@@ -44,12 +44,15 @@ public class CustomAdapter extends ArrayAdapter {
             convertView = inflater.inflate(R.layout.list_items, parent, false);
         }
         if((imageUrls1.size()!=0)&&(imageUrls1!=null)) {
-            images = imageUrls1.toArray(new String[imageUrls1.size()]);
+            images = imageUrls1.toArray(new Movie[imageUrls1.size()]);
 
-            Picasso.with(context).load("http://image.tmdb.org/t/p/w185/"+(images[position].split("&")[0])).fit().into((ImageView) convertView);
+            Picasso.with(context).load("http://image.tmdb.org/t/p/w185/"+(images[position].getPoster())).fit().into((ImageView) convertView);
 
         }
 
         return convertView;
+    }
+    public Movie getItem(int position){
+        return imageUrls1.get(position);
     }
 }

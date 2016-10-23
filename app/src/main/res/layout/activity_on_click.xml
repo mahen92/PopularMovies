@@ -6,24 +6,20 @@
     android:layout_height="match_parent"
 
     tools:context="com.example.mahendran.moviecritic.onClickActivity">
-    <LinearLayout
 
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:background="@color/custom"
-        android:id="@+id/linearLayout">
         <TextView  android:layout_width="match_parent"
+            android:orientation="horizontal"
             android:id="@+id/original"
-            android:text="Chappie"
-            android:textColor="@color/white"
             android:paddingLeft="20dp"
-            android:gravity="fill_vertical"
-            android:textAlignment="viewStart"
-            android:textSize="40sp"
-            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:layout_height="130dp"
+            android:background="@color/custom"
             android:layout_alignBottom="@+id/date" />
-    </LinearLayout>
+
     <LinearLayout
         android:paddingTop="10dp"
         android:id="@+id/linearLayout2"
@@ -32,10 +28,10 @@
         android:orientation="horizontal"
         android:layout_below="@+id/linearLayout">
         <ImageView
-            android:paddingTop="10dp"
-            android:paddingLeft="20dp"
-            android:layout_width="175dp"
-            android:layout_height="200dp"
+            android:paddingTop="@dimen/image_padding_up"
+            android:paddingLeft="@dimen/image_padding_left"
+            android:layout_width="@dimen/image_layout_width"
+            android:layout_height="@dimen/image_layout_height"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:id="@+id/clickImage"
@@ -69,6 +65,7 @@
     </LinearLayout>
 
     <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -79,7 +76,7 @@
         android:id="@+id/description"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="The path of the righteous man is beset on all sides by the inequities of the selfish and the tyranny of evil men"
+        tools:text="The path of the righteous man is beset on all sides by the inequities of the selfish and the tyranny of evil men"
             />
     </LinearLayout>
 

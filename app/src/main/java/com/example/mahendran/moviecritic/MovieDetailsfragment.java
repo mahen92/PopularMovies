@@ -42,10 +42,10 @@ import java.util.ArrayList;
 /**
  * Created by Mahendran on 15-08-2016.
  */
-public class fragment_class extends Fragment  {
-    String[] resultStrs;
-    ArrayList<String> resultS=new ArrayList<String>();
-    ArrayList<String> arrList=new ArrayList<String>();
+public class MovieDetailsfragment extends Fragment  {
+    //ArrayList<Movie> resultStrs=new ArrayList<>();
+    ArrayList<Movie> resultS=new ArrayList<>();
+
 
     CustomAdapter cs;
 
@@ -67,7 +67,7 @@ public class fragment_class extends Fragment  {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.forecastfragment, menu);
+        //inflater.inflate(R.menu.forecastfragment, menu);
     }
 
     @Override
@@ -76,9 +76,9 @@ public class fragment_class extends Fragment  {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_refresh) {
+        //if (id == R.id.action_refresh) {
 
-        }
+        //}
         return super.onOptionsItemSelected(item);
     }
 
@@ -103,7 +103,8 @@ public class fragment_class extends Fragment  {
             {
 
                     Intent intent = new Intent(getActivity(), onClickActivity.class);
-                    intent.putExtra(Intent.EXTRA_TEXT, resultS.get(position));
+                    Movie movie= cs.getItem(position);
+                    intent.putExtra("key", movie);
                     startActivity(intent);
 
             }
@@ -114,12 +115,12 @@ public class fragment_class extends Fragment  {
 
 
 
-    public class FetchMovieDetails extends AsyncTask<String, Void, String[]> {
+    public class FetchMovieDetails extends AsyncTask<String, Void, ArrayList<Movie>> {
         private final String LOG_TAG = FetchMovieDetails.class.getSimpleName();
         //private final String OPEN_WEATHER_MAP_API_KEY = "";
 
         @Override
-        protected String[] doInBackground(String... params) {
+        protected ArrayList<Movie> doInBackground(String... params) {
             // If there's no zip code, there's nothing to look up.  Verify size of params.
             if (params.length == 0) {
                 return null;
@@ -196,8 +197,7 @@ public class fragment_class extends Fragment  {
 
             } catch (IOException e) {
 
-                // If the code didn't successfully get the weather data, there's no point in attemping
-                // to parse it.
+
                 return null;
             } finally {
                 if (urlConnection != null) {
@@ -223,12 +223,12 @@ public class fragment_class extends Fragment  {
             return null;
 
         }
-        protected void onPostExecute(String[] result) {
+        protected void onPostExecute(ArrayList<Movie> result) {
 
             if (result != null) {
                 cs.clear();
-                for(String movieStr : result) {
-                    resultS.add(movieStr);
+                for(Movie movieStr : result) {
+                    cs.add(movieStr);
 
 
 
@@ -241,7 +241,7 @@ public class fragment_class extends Fragment  {
         }
 
 
-        private String[] getMovieDataFromJson(String JsonStr, int numDays)
+        private ArrayList<Movie> getMovieDataFromJson(String JsonStr, int numDays)
                 throws JSONException {
             final String POSTER_PATH = "poster_path";
             final String  OVERVIEW= "overview";
@@ -252,7 +252,8 @@ public class fragment_class extends Fragment  {
             final String RESULTS = "results";
             JSONObject movieJson = new JSONObject(JsonStr);
             JSONArray resultsArray=movieJson.getJSONArray(RESULTS);
-            resultStrs = new String[resultsArray.length()];
+            ArrayList<Movie> resultStrs=new ArrayList<>();
+
             for(int i=0;i<resultsArray.length();i++) {
                 JSONObject movieObject=resultsArray.getJSONObject(i);
                 String poster = movieObject.getString(POSTER_PATH);
@@ -261,8 +262,8 @@ public class fragment_class extends Fragment  {
                 String voteAverage = movieObject.getString(VOTE_AVERAGE);
                 String originalTitle = movieObject.getString(ORIGINAL_TITLE);
                 String background = movieObject.getString("backdrop_path");
-                resultStrs[i]=poster+"&"+overView+"&"+releaseDate+"&"+voteAverage+"&"+originalTitle+"&"+background;
 
+                resultStrs.add(new Movie(poster, overView, releaseDate, voteAverage, originalTitle, background));
             }
 
 

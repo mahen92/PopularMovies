@@ -27,17 +27,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if(savedInstanceState==null)
         {
-            getSupportFragmentManager().beginTransaction().add(R.id.container,new fragment_class()).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.container,new MovieDetailsfragment()).commit();
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
     }
 
@@ -58,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            return true;
+
+        }
+        if (id == R.id.miSort) {
             startActivity(new Intent(this,settingsActivity.class));
             return true;
 

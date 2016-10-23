@@ -10,8 +10,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 public class onClickActivity extends AppCompatActivity {
-    String builder;
-    String[] splits;
+
+    Movie movie=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,27 +22,19 @@ public class onClickActivity extends AppCompatActivity {
         TextView orig = (TextView) findViewById(R.id.original);
         TextView vote = (TextView) findViewById(R.id.vote);
         Intent intent=this.getIntent();
-        if(intent!=null&&intent.hasExtra(Intent.EXTRA_TEXT))
-        {
 
-            builder=intent.getStringExtra(Intent.EXTRA_TEXT);
-        }
-        if(builder!=null) {
-            splits = builder.split("&");
-        }
-        if(splits!=null) {
-            if ((splits.length != 0) && (splits != null)) {
-                for (String i : splits) {
+            movie = (Movie) intent.getParcelableExtra("key");
 
-                }
 
-                Picasso.with(this).load("http://image.tmdb.org/t/p/w185/" + splits[0]).into(img);
-                desc.setText(splits[1]);
-                date.setText((splits[2]).split("-")[0]);
-                vote.setText(splits[3]);
-                orig.setText(splits[4]);
+
+
+                Picasso.with(this).load("http://image.tmdb.org/t/p/w185/" + movie.getPoster()).into(img);
+                desc.setText(movie.getOverview());
+                date.setText(movie.getReleaseDate());
+                vote.setText(movie.getVoteAverage());
+                orig.setText(movie.getOriginalTitle());
             }
         }
 
-    }
-}
+
+
