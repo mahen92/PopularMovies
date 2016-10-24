@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,6 +8,7 @@
     android:layout_height="match_parent"
 
     tools:context="com.example.mahendran.moviecritic.onClickActivity">
+
 
         <TextView  android:layout_width="match_parent"
             android:orientation="horizontal"
@@ -15,8 +18,8 @@
             android:textColor="@color/white"
             android:fontFamily="sans-serif-condensed"
             android:textStyle="bold"
-            android:textSize="30dp"
-            android:layout_height="130dp"
+            android:textSize="30sp"
+            android:layout_height="wrap_content"
             android:background="@color/custom"
             android:layout_alignBottom="@+id/date" />
 
@@ -65,19 +68,26 @@
     </LinearLayout>
 
     <LinearLayout
+
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@+id/linearLayout2">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/movie_details_layout_scrollView">
         <TextView
             android:paddingLeft="20dp"
             android:paddingTop="20dp"
-        android:id="@+id/description"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        tools:text="The path of the righteous man is beset on all sides by the inequities of the selfish and the tyranny of evil men"
+            android:id="@+id/description"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            tools:text="The path of the righteous man is beset on all sides by the inequities of the selfish and the tyranny of evil men"
             />
+        </ScrollView>
     </LinearLayout>
 
 

@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.provider.Settings.Global;
 import android.provider.Settings.System;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -45,8 +46,6 @@ import java.util.ArrayList;
 public class MovieDetailsfragment extends Fragment  {
     //ArrayList<Movie> resultStrs=new ArrayList<>();
     ArrayList<Movie> resultS=new ArrayList<>();
-
-
     CustomAdapter cs;
 
     @Override
@@ -229,13 +228,13 @@ public class MovieDetailsfragment extends Fragment  {
                 cs.clear();
                 for(Movie movieStr : result) {
                     cs.add(movieStr);
-
-
-
                 }
+            }
+            else
+            {
 
-
-
+                Toast toast = Toast.makeText(getContext(), "An error Occured while displaying the information", Toast.LENGTH_SHORT);
+                toast.show();
             }
         }
         }
@@ -265,10 +264,7 @@ public class MovieDetailsfragment extends Fragment  {
 
                 resultStrs.add(new Movie(poster, overView, releaseDate, voteAverage, originalTitle, background));
             }
-
-
-           return resultStrs;
+            return resultStrs;
         }
-
-}
+    }
 
