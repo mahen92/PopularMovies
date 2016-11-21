@@ -2,33 +2,27 @@ package com.example.mahendran.moviecritic;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
+import com.example.mahendran.moviecritic.NetworkData.Movie;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements MovieDetailsfragment.Callback {
+    private boolean mTwoPane;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
+        mTwoPane = findViewById(R.id.detail_container) != null;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(savedInstanceState==null)
+       /* if(savedInstanceState==null)
         {
             getSupportFragmentManager().beginTransaction().add(R.id.container,new MovieDetailsfragment()).commit();
-        }
+        }*/
 
 
 
@@ -62,5 +56,25 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemSelected(Movie movie) {
+
+        if (mTwoPane) {
+            Bundle arguments = new Bundle();
+            arguments.putParcelable(DetailFragment.MOVIE_ARGS, movie);
+            DetailFragment fragment = new DetailFragment();
+            fragment.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.detail_container, fragment)
+                    .commit();
+        } else {
+
+            Intent intent = new Intent(this, onClickActivity.class);
+            intent.putExtra("key", movie);
+            startActivity(intent);
+        }
+
     }
 }

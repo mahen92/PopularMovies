@@ -21,11 +21,16 @@
     <!-- Value in SharedPreferences for imperial temperature unit option [CHAR LIMIT=NONE] -->
     <string name="pref_units_toprated_unit" translatable="false">top_rated</string>
     <string name="pref_units_toprated_unitnew" translatable="false">top_rated</string>
+    <string name="pref_units_favorites" translatable="false">Favorites</string>
+    <string name="pref_units_label_favorites" translatable="false">Favorites</string>
     <string name="pref_units_options" translatable="false">Options</string>
 
-    <string name="detail_title" translatable="false">MovieDetail</string>
+    <!--<string name="detail_title" translatable="false">MovieDetail</string>!-->
 
     <string name="app_title" translatable="false">Pop Movies</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
